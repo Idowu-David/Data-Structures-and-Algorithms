@@ -50,10 +50,10 @@ class SinglyLinkedList:
     
     def insert_at_end(self, value):
         """Inserts a new node to the end of a SLL"""
-        new = Node(value)
         if self.head == None: # if SLL is empty
             self.insert_at_beginning(value)
         else:
+            new = Node(value)
             self.tail.next = new
             self.tail = new
         self.size += 1
