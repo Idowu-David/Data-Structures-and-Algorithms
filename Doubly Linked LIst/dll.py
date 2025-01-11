@@ -58,7 +58,21 @@ class DoublyLinkedList:
             new.prev = prev
             prev.next = new
         self.size += 1
-            
+        
+    # ===========================SEARCH ALGORITHMS=============================
+    def search(self, value):
+        """Search for a value or node in the linked list"""
+        current = self.head
+        if current == None:
+            raise ValueError("Linked List is empty")
+        count = 0
+        positions = []
+        while current:
+            if current.value == value:
+                positions.append(count)
+            current = current.next
+            count += 1
+        return positions if positions else -1            
                 
                     
     def __str__(self):
@@ -89,3 +103,4 @@ node.insert_at_end(4)
 print(node)
 node.insert_at_position(1, 3)
 print(node)
+print(node.search(2))
