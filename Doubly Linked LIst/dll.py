@@ -72,7 +72,12 @@ class DoublyLinkedList:
                 positions.append(count)
             current = current.next
             count += 1
-        return positions if positions else -1            
+        return positions if positions else -1   
+    
+    # ===========================DELETE ALGORITHMS=============================
+    def delete(self, value):
+        """Deletes the first occurence of a Node in the linked list"""
+        pass                        
                 
                     
     def __str__(self):
@@ -103,4 +108,13 @@ node.insert_at_end(4)
 print(node)
 node.insert_at_position(1, 3)
 print(node)
-print(node.search(2))
+node.delete(3)
+print(node)
+node.delete(2)
+print(node)
+node.delete(8)
+print(node)
+node.delete(4)
+print(node)
+node.delete(5)
+print(node)
