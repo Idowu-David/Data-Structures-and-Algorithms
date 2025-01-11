@@ -15,7 +15,7 @@ class DoublyLinkedList:
     def insert_at_beginning(self, value):
         """Inserts a node at the beginning of the dll"""
         new = Node(value)
-        if self.head == None: # No node in the list
+        if self.head is None: # No node in the list
             self.head = self.tail = new
         # Make new node the head in an existing list
         else:
@@ -26,8 +26,9 @@ class DoublyLinkedList:
         
     def insert_at_end(self, value):
         """Inserts a new node to the end of a dll"""
-        if self.head == None: # if DLL is empty
-            self.insert_at_beginning(value)
+        new = Node(value)
+        if self.head is None: # if DLL is empty
+            self.head = self.tail = new
         else:
             new = Node(value)
             self.tail.next = new
@@ -41,36 +42,29 @@ class DoublyLinkedList:
             raise ValueError("Position greater than size of the list")
         if position < 0:
             raise ValueError("Position cannot be negative")
+        if position == self.size:
+            self.insert_at_end(value)
             
         new = Node(value)
         if position == 0:   # Add node at the beginning
-            if self.head == None:   # List is empty
-                self.head = new
-            else:
-                new.next = self.head
-                self.head.prev = new
-                self.head = new
+            self.insert_at_beginning(value)
         else:
             current = self.head
             for _ in range(position):
-                prev = current
                 current = current.next
-            if not current:
-                prev.next = new
-                new.prev = prev
-                self.tail = new
-            else:
-                prev = current.prev
-                new.next = current
-                current.prev = new
-                new.prev = prev
-                prev.next = new
+            prev = current.prev
+            new.next = current
+            current.prev = new
+            new.prev = prev
+            prev.next = new
         self.size += 1
             
                 
                     
     def __str__(self):
         """Prints the singly linked list"""
+        if self.head is None:
+            return "Empty list"
         current = self.head
         st = ""
         while current:
@@ -83,6 +77,8 @@ class DoublyLinkedList:
 
  # Initialize the list
 node = DoublyLinkedList()
+print(node)
+
 node.insert_at_position(3, 0)
 print(node)
 node.insert_at_position(2, 1)
