@@ -77,8 +77,32 @@ class DoublyLinkedList:
     # ===========================DELETE ALGORITHMS=============================
     def delete(self, value):
         """Deletes the first occurence of a Node in the linked list"""
-        pass                        
-                
+        if self.head == None:
+            raise ValueError("Linked List is empty")
+        
+        current = self.head
+        if current.value == value: # if the node to delete is the head
+            self.head = self.head.next
+            self.head.prev = None
+            current = None
+            self.size -= 1
+            return True               
+
+        prev = current
+        while current.next:
+            if current.value == value:
+                prev.next = current.next
+                current.prev = prev
+                current = prev = None  
+                self.size -= 1              
+                return True
+            prev = current
+            current = current.next
+            if current.next == None and current.value == value:
+                current = prev.next = None
+                self.size -= 1
+                return True
+        raise ValueError("Node not in the Linked List")                
                     
     def __str__(self):
         """Prints the singly linked list"""
@@ -116,5 +140,5 @@ node.delete(8)
 print(node)
 node.delete(4)
 print(node)
-node.delete(5)
+node.delete(3)
 print(node)
